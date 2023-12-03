@@ -1,0 +1,51 @@
+{
+  "posts": [
+    {
+      "id": 1,
+      "title": "json-server",
+      "author": "typicode"
+    }
+  ],
+  "comments": [
+    {
+      "id": 1,
+      "body": "some comment",
+      "postId": 1
+    }
+  ],
+  "users": [
+    {
+      "id": 1,
+      "name": "John Doe",
+      "email": "joh1n@gmail.com",
+      "password": 123456789
+    },
+    {
+      "id": 2,
+      "name": "John Doe",
+      "email": "joh1n@gmail.com",
+      "password": 123456789
+    },
+    {
+      "id": 3
+    },
+    {
+      "id": 4
+    },
+    {
+      "id": 5
+    },
+    {
+      "id": 6
+    },
+    {
+      "email": "infotestingqa@gmail.com",
+      "id": 7,
+      "password": "123455",
+      "username": "UserName"
+    }
+  ],
+  "profile": {
+    "name": "typicode"
+  }
+}
