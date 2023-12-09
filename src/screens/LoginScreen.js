@@ -5,18 +5,31 @@ import {
   TouchableOpacity,
   View,
   StyleSheet,
-  Button,
+  Image,
 } from "react-native";
 import Spinner from "react-native-loading-spinner-overlay";
 import { AuthContext } from "../context/AuthContext";
-
+import BurgerMenu from "../components/BurgerMenu";
 const LoginScreen = ({ navigation }) => {
+  const [isMenuVisible, setMenuVisible] = useState(false);
+
+  const toggleMenu = () => {
+    setMenuVisible(!isMenuVisible);
+  };
+
   const [email, setEmail] = useState(null);
   const [password, setPassword] = useState(null);
   const { isLoading, login } = useContext(AuthContext);
 
   return (
     <View style={styles.container}>
+      <View style={styles.burger}>
+        <TouchableOpacity onPress={toggleMenu}>
+          <Image source={require("../img/Burger.jpg")} />
+        </TouchableOpacity>
+
+        <BurgerMenu isVisible={isMenuVisible} toggleMenu={toggleMenu} />
+      </View>
       <Text style={styles.title}>Sign in</Text>
       <Spinner visible={isLoading} />
       <View style={styles.wrapper}>
@@ -50,13 +63,6 @@ const LoginScreen = ({ navigation }) => {
             <Text style={styles.link}>Create One</Text>
           </TouchableOpacity>
         </View>
-        <Button
-          title="HOME"
-          color="red"
-          onPress={() => {
-            navigation.navigate("Home");
-          }}
-        />
       </View>
     </View>
   );

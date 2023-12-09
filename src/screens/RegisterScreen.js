@@ -6,15 +6,22 @@ import {
   View,
   StyleSheet,
   Alert,
+  Image,
 } from "react-native";
 import Spinner from "react-native-loading-spinner-overlay";
 import { AuthContext } from "../context/AuthContext";
-
+import BurgerMenu from "../components/BurgerMenu";
 const RegisterScreen = ({ navigation }) => {
   const alertPassword = () =>
     Alert.alert("Ups..", "Incorrect password must have a minimum length of 8");
   const alertName = () =>
     Alert.alert("Ups..", "Incorrect password must have a minimum length of 3");
+
+  const [isMenuVisible, setMenuVisible] = useState(false);
+
+  const toggleMenu = () => {
+    setMenuVisible(!isMenuVisible);
+  };
 
   const [username, setName] = useState("");
 
@@ -26,6 +33,13 @@ const RegisterScreen = ({ navigation }) => {
 
   return (
     <View style={styles.container}>
+      <View style={styles.burger}>
+        <TouchableOpacity onPress={toggleMenu}>
+          <Image source={require("../img/Burger.jpg")} />
+        </TouchableOpacity>
+
+        <BurgerMenu isVisible={isMenuVisible} toggleMenu={toggleMenu} />
+      </View>
       <Text style={styles.title}>Sign in</Text>
       <Spinner visible={isLoading} />
       <View style={styles.wrapper}>
