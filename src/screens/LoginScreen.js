@@ -5,6 +5,7 @@ import {
   TouchableOpacity,
   View,
   StyleSheet,
+  Button,
 } from "react-native";
 import Spinner from "react-native-loading-spinner-overlay";
 import { AuthContext } from "../context/AuthContext";
@@ -49,6 +50,13 @@ const LoginScreen = ({ navigation }) => {
             <Text style={styles.link}>Create One</Text>
           </TouchableOpacity>
         </View>
+        <Button
+          title="HOME"
+          color="red"
+          onPress={() => {
+            navigation.navigate("Home");
+          }}
+        />
       </View>
     </View>
   );
