@@ -6,6 +6,7 @@ import LoginScreen from "../screens/LoginScreen";
 import RegisterScreen from "../screens/RegisterScreen";
 import { AuthContext } from "../context/AuthContext";
 import { Alert } from "react-native";
+
 const Stack = createNativeStackNavigator();
 
 const Navigation = () => {
@@ -14,11 +15,13 @@ const Navigation = () => {
     <NavigationContainer>
       <Stack.Navigator>
         {userInfo.token ? (
-          <Stack.Screen
-            name="Home"
-            component={HomeScreen}
-            options={{ headerShown: false }}
-          />
+          <>
+            <Stack.Screen
+              name="Home"
+              component={HomeScreen}
+              options={{ headerShown: false }}
+            />
+          </>
         ) : (
           <>
             <Stack.Screen
