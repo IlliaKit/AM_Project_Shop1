@@ -8,7 +8,7 @@ import {
   Image,
   TouchableOpacity,
   Modal,
-  Button,
+  ScrollView,
 } from "react-native";
 import Spinner from "react-native-loading-spinner-overlay";
 import { AuthContext } from "../context/AuthContext";
@@ -54,7 +54,6 @@ const HomeScreen = () => {
         <Image source={{ uri: item.image }} style={styles.itemImage} />
         <View style={styles.itemDetails}>
           <Text>{item.title}</Text>
-          <Text style={{ fontWeight: "300" }}>{item.category}</Text>
           <Text>{item.price}$</Text>
         </View>
       </View>
@@ -82,18 +81,41 @@ const HomeScreen = () => {
 
           <FlatList
             data={products}
-            keyExtractor={(element) => element.id.toString()}
             renderItem={renderItem}
+            keyExtractor={(element) => element.id}
           />
 
           <Modal visible={isProductModalVisible} animationType="slide">
-            <View style={styles.productModalContainer}>
-              <Text>{selectedProduct?.title}</Text>
-              <Text>{selectedProduct?.category}</Text>
-              <Text>{selectedProduct?.price}$</Text>
-
-              <Button title="Close" onPress={toggleProductModal} />
-            </View>
+            <TouchableOpacity
+              style={{ marginTop: 20 }}
+              onPress={toggleProductModal}
+            >
+              <Image source={require("../img/Burger.jpg")} />
+            </TouchableOpacity>
+            <ScrollView>
+              <View style={styles.productModalContainer}>
+                <View style={styles.wrapper}>
+                  <Image
+                    source={{ uri: selectedProduct?.image }}
+                    style={styles.selectItemImg}
+                  />
+                  <Text style={{ marginBottom: 20, marginTop: 20 }}>
+                    {selectedProduct?.title}
+                  </Text>
+                  <Text style={styles.selectPrice}>
+                    ${selectedProduct?.price}
+                  </Text>
+                  <Text style={styles.input}>Size</Text>
+                  <Text style={styles.input}>Color</Text>
+                  <Text style={{ marginBottom: 20 }}>
+                    {selectedProduct?.description}
+                  </Text>
+                  <TouchableOpacity style={styles.ButAddToBag}>
+                    <Text style={{ color: "white" }}>Add to Bag</Text>
+                  </TouchableOpacity>
+                </View>
+              </View>
+            </ScrollView>
           </Modal>
         </>
       )}
@@ -107,6 +129,9 @@ const styles = StyleSheet.create({
     flex: 1,
     alignItems: "flex-start",
     justifyContent: "center",
+  },
+  wrapper: {
+    width: "90%",
   },
   burger: {
     alignItems: "flex-start",
@@ -130,6 +155,35 @@ const styles = StyleSheet.create({
   },
   productModalContainer: {
     flex: 1,
+    marginTop: 10,
+    alignItems: "center",
+    justifyContent: "flex-start",
+  },
+  selectItemImg: {
+    height: 300,
+    width: 300,
+  },
+  selectPrice: {
+    color: "#8181F7",
+    fontWeight: "bold",
+    marginBottom: 20,
+  },
+  input: {
+    marginBottom: 20,
+    borderWidth: 1,
+    borderColor: "#E6E6E6",
+    backgroundColor: "#E6E6E6",
+    borderRadius: 10,
+    height: 50,
+    width: "90%",
+    paddingLeft: 10,
+    paddingTop: 10,
+  },
+  ButAddToBag: {
+    height: 40,
+    paddingEnd: 10,
+    backgroundColor: "#8181F7",
+    borderRadius: 30,
     justifyContent: "center",
     alignItems: "center",
   },
