@@ -5,7 +5,7 @@ import HomeScreen from "../screens/HomeScreen";
 import LoginScreen from "../screens/LoginScreen";
 import RegisterScreen from "../screens/RegisterScreen";
 import { AuthContext } from "../context/AuthContext";
-
+import { Alert } from "react-native";
 const Stack = createNativeStackNavigator();
 
 const Navigation = () => {

@@ -13,7 +13,7 @@ import { AuthContext } from "../context/AuthContext";
 import axios from "axios";
 import BurgerMenu from "../components/BurgerMenu";
 const HomeScreen = ({ navigation }) => {
-  const { isLoading, logout } = useContext(AuthContext);
+  const { isLoading } = useContext(AuthContext);
   const [products, setProducts] = useState([]);
   const [productLoading, setProductLoading] = useState(false);
 

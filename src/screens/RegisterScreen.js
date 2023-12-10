@@ -29,17 +29,21 @@ const RegisterScreen = ({ navigation }) => {
 
   const [password, setPassword] = useState("");
 
-  const { isLoading, register } = useContext(AuthContext);
+  const { isLoading, register, userInfo } = useContext(AuthContext);
 
   return (
     <View style={styles.container}>
-      <View style={styles.burger}>
-        <TouchableOpacity onPress={toggleMenu}>
-          <Image source={require("../img/Burger.jpg")} />
-        </TouchableOpacity>
+      {userInfo.token ? (
+        <>
+          <View style={styles.burger}>
+            <TouchableOpacity onPress={toggleMenu}>
+              <Image source={require("../img/Burger.jpg")} />
+            </TouchableOpacity>
 
-        <BurgerMenu isVisible={isMenuVisible} toggleMenu={toggleMenu} />
-      </View>
+            <BurgerMenu isVisible={isMenuVisible} toggleMenu={toggleMenu} />
+          </View>
+        </>
+      ) : null}
       <Text style={styles.title}>Sign in</Text>
       <Spinner visible={isLoading} />
       <View style={styles.wrapper}>
