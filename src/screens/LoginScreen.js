@@ -5,17 +5,37 @@ import {
   TouchableOpacity,
   View,
   StyleSheet,
+  Image,
 } from "react-native";
-import Spinner from "react-native-loading-spinner-overlay";
-import { AuthContext } from "../context/AuthContext";
 
+import { AuthContext } from "../context/AuthContext";
+import BurgerMenu from "../components/BurgerMenu";
+import Spinner from "react-native-loading-spinner-overlay";
 const LoginScreen = ({ navigation }) => {
+  const [isMenuVisible, setMenuVisible] = useState(false);
+
+  const toggleMenu = () => {
+    setMenuVisible(!isMenuVisible);
+  };
+
   const [email, setEmail] = useState(null);
   const [password, setPassword] = useState(null);
-  const { isLoading, login } = useContext(AuthContext);
+  const { isLoading, login, userInfo } = useContext(AuthContext);
 
   return (
     <View style={styles.container}>
+      {userInfo.token ? (
+        <>
+          <View style={styles.burger}>
+            <TouchableOpacity onPress={toggleMenu}>
+              <Image source={require("../img/Burger.jpg")} />
+            </TouchableOpacity>
+
+            <BurgerMenu isVisible={isMenuVisible} toggleMenu={toggleMenu} />
+          </View>
+        </>
+      ) : null}
+
       <Text style={styles.title}>Sign in</Text>
       <Spinner visible={isLoading} />
       <View style={styles.wrapper}>

@@ -2,7 +2,7 @@ import AsyncStorage from "@react-native-async-storage/async-storage";
 import axios from "axios";
 import React, { createContext, useEffect, useState } from "react";
 import { BASE_URL } from "../config";
-
+import { Alert } from "react-native";
 export const AuthContext = createContext();
 
 export const AuthProvider = ({ children }) => {
@@ -25,9 +25,11 @@ export const AuthProvider = ({ children }) => {
         AsyncStorage.setItem("userInfo", JSON.stringify(userInfo));
         setIsLoading(false);
         console.log(userInfo);
+        Alert.alert("", "Registration completed successfully");
       })
       .catch((e) => {
         console.log(`register error ${e}`);
+        Alert.alert("Ups..", "Something went wrong, try again");
         setIsLoading(false);
       });
   };
@@ -49,31 +51,15 @@ export const AuthProvider = ({ children }) => {
       })
       .catch((e) => {
         console.log(`login error ${e}`);
+        Alert.alert("Ups..", "Something went wrong, try again");
         setIsLoading(false);
       });
   };
 
   const logout = () => {
     setIsLoading(true);
-
-    axios
-      .post(
-        `${BASE_URL}/logout`,
-        {},
-        {
-          headers: { Authorization: `Bearer ${userInfo.token}` },
-        }
-      )
-      .then((res) => {
-        console.log(res.data);
-        AsyncStorage.removeItem("userInfo");
-        setUserInfo({});
-        setIsLoading(false);
-      })
-      .catch((e) => {
-        console.log(`logout error ${e}`);
-        setIsLoading(false);
-      });
+    setUserInfo({});
+    setIsLoading(false);
   };
 
   const isLoggedIn = async () => {
