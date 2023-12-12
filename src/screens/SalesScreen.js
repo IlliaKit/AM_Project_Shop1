@@ -9,16 +9,15 @@ import {
   Modal,
   ScrollView,
 } from "react-native";
+
 import Spinner from "react-native-loading-spinner-overlay";
 import { AuthContext } from "../context/AuthContext";
 import axios from "axios";
 import BurgerMenu from "../components/BurgerMenu";
-import { styles } from "../components/styles.js";
-import { useCart } from "../components/CartContext.js";
+import { styles } from "../components/styles.js"; // Импорт стилей из отдельного файла
 
-const HomeScreen = () => {
+const SalesScreen = () => {
   const { isLoading } = useContext(AuthContext);
-  const { addToCart } = useCart();
   const [products, setProducts] = useState([]);
   const [productLoading, setProductLoading] = useState(false);
 
@@ -44,7 +43,7 @@ const HomeScreen = () => {
     setProductLoading(true);
 
     axios
-      .get("https://fakestoreapi.com/products/category/women's clothing")
+      .get("https://fakestoreapi.com/products/category/men's clothing")
       .then((res) => {
         setProducts(res.data);
       })
@@ -56,13 +55,6 @@ const HomeScreen = () => {
       });
   }, []);
 
-  const handleAddToBag = () => {
-    if (selectedProduct) {
-      addToCart(selectedProduct);
-      toggleProductModal();
-    }
-  };
-
   const renderItem = ({ item }) => (
     <TouchableOpacity onPress={() => handleProductPress(item)}>
       <View style={styles.itemContainer}>
@@ -70,8 +62,19 @@ const HomeScreen = () => {
         <Text style={styles.itemTitle} numberOfLines={1} ellipsizeMode="tail">
           {item.title}
         </Text>
-        <Text style={styles.itemDescription} ellipsizeMode="tail">
-          ${item.price}
+        <Text ellipsizeMode="tail">
+          <Text
+            style={{
+              textDecorationLine: "line-through",
+              textDecorationColor: "red",
+            }}
+          >
+            ${item.price}
+          </Text>
+          <Text style={{ color: "red", fontWeight: "bold" }}>
+            {" "}
+            ${item.price - 10}
+          </Text>
         </Text>
       </View>
     </TouchableOpacity>
@@ -95,7 +98,17 @@ const HomeScreen = () => {
             </TouchableOpacity>
             <BurgerMenu isVisible={isMenuVisible} toggleMenu={toggleMenu} />
           </View>
-
+          <Text
+            style={{
+              paddingLeft: "15%",
+              marginBottom: 20,
+              fontWeight: "bold",
+              alignContent: "center",
+              justifyContent: "center",
+            }}
+          >
+            Only office supplies in the shop
+          </Text>
           <FlatList
             data={products}
             numColumns={2}
@@ -129,7 +142,7 @@ const HomeScreen = () => {
                     {selectedProduct?.title}
                   </Text>
                   <Text style={styles.selectPrice}>
-                    ${selectedProduct?.price}
+                    ${selectedProduct?.price - 10}
                   </Text>
                   <View style={styles.size_color}>
                     <Text>Size</Text>
@@ -170,14 +183,11 @@ const HomeScreen = () => {
                       <Text>XL</Text>
                     </TouchableOpacity>
                   </View>
-                  <Text style={styles.input}>Color </Text>
+                  <Text style={styles.input}>Color</Text>
                   <Text style={{ marginBottom: 20 }}>
                     {selectedProduct?.description}
                   </Text>
-                  <TouchableOpacity
-                    style={styles.ButAddToBag}
-                    onPress={handleAddToBag}
-                  >
+                  <TouchableOpacity style={styles.ButAddToBag}>
                     <Text style={{ color: "white" }}>Add to Bag</Text>
                   </TouchableOpacity>
                 </View>
@@ -190,4 +200,4 @@ const HomeScreen = () => {
   );
 };
 
-export default HomeScreen;
+export default SalesScreen;

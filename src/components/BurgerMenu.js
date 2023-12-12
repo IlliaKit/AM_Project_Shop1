@@ -40,7 +40,7 @@ const BurgerMenu = ({ isVisible, toggleMenu }) => {
 
         <TouchableOpacity
           style={styles.input}
-          onPress={() => navigateToScreen("")}
+          onPress={() => navigateToScreen("Sales")}
         >
           <Image source={require("../img/Sales.png")} />
           <Text> Sales</Text>
@@ -48,12 +48,18 @@ const BurgerMenu = ({ isVisible, toggleMenu }) => {
 
         <TouchableOpacity
           style={styles.input}
-          onPress={() => navigateToScreen("")}
+          onPress={() => navigateToScreen("Cart")}
         >
           <Image source={require("../img/Cart.png")} />
           <Text> Cart</Text>
         </TouchableOpacity>
-
+        <TouchableOpacity
+          style={styles.input}
+          onPress={() => navigateToScreen("AddItem")}
+        >
+          <Image source={require("../img/addItem.png")} />
+          <Text>Add new</Text>
+        </TouchableOpacity>
         <TouchableOpacity
           style={styles.input}
           onPress={() => {
