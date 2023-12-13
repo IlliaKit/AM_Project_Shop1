@@ -58,7 +58,7 @@ const HomeScreen = () => {
 
   const handleAddToBag = () => {
     if (selectedProduct) {
-      addToCart(selectedProduct);
+      addToCart(selectedProduct, selectedSize);
       toggleProductModal();
     }
   };

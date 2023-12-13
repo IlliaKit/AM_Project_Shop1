@@ -6,7 +6,8 @@ import { styles } from "../components/styles.js";
 import { useCart } from "../components/CartContext.js";
 
 const CartScreen = ({ navigation }) => {
-  const { cartItems, removeFromCart } = useCart();
+  const { cartItems, removeFromCart, addToCart } = useCart();
+
   const [isMenuVisible, setMenuVisible] = useState(false);
   const toggleMenu = () => {
     setMenuVisible(!isMenuVisible);
@@ -58,9 +59,16 @@ const CartScreen = ({ navigation }) => {
                     style={{ width: 30, height: 30 }}
                   />
                   <Text style={styles.cartItemTitle}>{item.title}</Text>
-                  <Text style={styles.cartItemTitle}>{item.price}</Text>
+                  <Text style={styles.cartItemTitle}>Size: {item.size}</Text>
+                  <Text style={styles.cartItemTitle}>
+                    {item.price * item.quantity}
+                  </Text>
                   <TouchableOpacity onPress={() => removeFromCart(item)}>
-                    <Text style={{ color: "red" }}>Remove</Text>
+                    <Text style={{ paddingRight: 10 }}>-</Text>
+                  </TouchableOpacity>
+                  <Text style={styles.cartItemTitle}>{item.quantity}</Text>
+                  <TouchableOpacity onPress={() => addToCart(item, item.size)}>
+                    <Text style={{ paddingLeft: 10 }}>+</Text>
                   </TouchableOpacity>
                 </View>
               ))}
