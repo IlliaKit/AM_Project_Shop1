@@ -58,7 +58,7 @@ const HomeScreen = () => {
 
   const handleAddToBag = () => {
     if (selectedProduct) {
-      addToCart(selectedProduct);
+      addToCart(selectedProduct, selectedSize);
       toggleProductModal();
     }
   };
@@ -170,7 +170,7 @@ const HomeScreen = () => {
                       <Text>XL</Text>
                     </TouchableOpacity>
                   </View>
-                  <Text style={styles.input}>Color </Text>
+
                   <Text style={{ marginBottom: 20 }}>
                     {selectedProduct?.description}
                   </Text>

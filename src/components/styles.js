@@ -6,6 +6,7 @@ export const styles = StyleSheet.create({
   container: {
     marginTop: "12%",
     flex: 1,
+
     alignItems: "flex-start",
     justifyContent: "center",
   },
@@ -51,6 +52,7 @@ export const styles = StyleSheet.create({
     borderRadius: 30,
     justifyContent: "center",
     alignItems: "center",
+    marginBottom: 20,
   },
   size_color: {
     flex: 1,
