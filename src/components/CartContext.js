@@ -30,6 +30,11 @@ export const CartProvider = ({ children }) => {
     }
   };
 
+  const removeFromCartAll = () => {
+    setCartItems([]);
+    console.log("Remove All");
+  };
+
   const removeFromCart = (item, size) => {
     setCartItems((prevItems) =>
       prevItems.reduce((acc, i) => {
@@ -44,7 +49,9 @@ export const CartProvider = ({ children }) => {
   };
 
   return (
-    <CartContext.Provider value={{ cartItems, addToCart, removeFromCart }}>
+    <CartContext.Provider
+      value={{ cartItems, addToCart, removeFromCart, removeFromCartAll }}
+    >
       {children}
     </CartContext.Provider>
   );

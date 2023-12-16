@@ -1,15 +1,9 @@
 import React from "react";
 import { useState } from "react";
-import {
-  View,
-  TouchableOpacity,
-  Image,
-  TextInput,
-  Text,
-  StyleSheet,
-} from "react-native";
-
+import { View, TouchableOpacity, Image, Text, StyleSheet } from "react-native";
+import { useCart } from "../components/CartContext.js";
 const PlaceOrderSuc = ({ navigation }) => {
+  const { removeFromCartAll } = useCart();
   return (
     <View style={styles.container}>
       <View
@@ -38,9 +32,12 @@ const PlaceOrderSuc = ({ navigation }) => {
             alignItems: "center",
             marginBottom: 20,
           }}
-          onPress={() => navigation.navigate("PlaceOrder")}
+          onPress={() => {
+            navigation.navigate("Home");
+            removeFromCartAll();
+          }}
         >
-          <Text style={{ color: "white" }}> Place Order</Text>
+          <Text style={{ color: "white" }}> Go home Screen</Text>
         </TouchableOpacity>
       </View>
     </View>
