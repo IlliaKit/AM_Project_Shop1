@@ -20,7 +20,7 @@ const CartScreen = ({ navigation }) => {
     setMenuVisible(!isMenuVisible);
   };
 
-  const navigateToComponentB = () => {
+  const navigateToComponentPlaceOrder = () => {
     navigation.navigate("PlaceOrder", { data: getTotalPrice() });
   };
 
@@ -124,7 +124,7 @@ const CartScreen = ({ navigation }) => {
                   alignItems: "center",
                   marginBottom: 20,
                 }}
-                onPress={navigateToComponentB}
+                onPress={navigateToComponentPlaceOrder}
               >
                 <Text style={{ color: "white" }}>Checkout</Text>
               </TouchableOpacity>

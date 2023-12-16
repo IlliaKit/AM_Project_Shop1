@@ -9,6 +9,7 @@ import SalesScreen from "../screens/SalesScreen";
 import AddNewItemScreen from "../screens/AddNewItemScreen";
 import CartScreen from "../screens/CartScreen";
 import PlaceOrder from "../screens/PlaceOrder";
+import PlaceOrderSuc from "../screens/PlaceOrderSuc";
 const Stack = createNativeStackNavigator();
 
 const Navigation = () => {
@@ -41,6 +42,11 @@ const Navigation = () => {
             <Stack.Screen
               name="PlaceOrder"
               component={PlaceOrder}
+              options={{ headerShown: false }}
+            />
+            <Stack.Screen
+              name="PlaceOrderSuc"
+              component={PlaceOrderSuc}
               options={{ headerShown: false }}
             />
           </>

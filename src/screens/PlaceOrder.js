@@ -104,7 +104,7 @@ const PlaceOrder = ({ route, navigation }) => {
             alignItems: "center",
             marginBottom: 20,
           }}
-          onPress={() => navigation.navigate("Cart")}
+          onPress={() => navigation.navigate("PlaceOrderSuc")}
         >
           <View style={{ flexDirection: "row" }}>
             <Text style={{ color: "white", fontWeight: "bold" }}>
