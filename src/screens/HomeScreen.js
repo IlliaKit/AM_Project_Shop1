@@ -134,37 +134,25 @@ const HomeScreen = () => {
                   <View style={styles.size_color}>
                     <Text>Size</Text>
                     <TouchableOpacity
-                      style={[
-                        styles.input_second,
-                        selectedSize === "S" && styles.selectedSize,
-                      ]}
+                      style={[selectedSize === "S" && styles.selectedSize]}
                       onPress={() => handleSizePress("S")}
                     >
                       <Text>S</Text>
                     </TouchableOpacity>
                     <TouchableOpacity
-                      style={[
-                        styles.input_second,
-                        selectedSize === "M" && styles.selectedSize,
-                      ]}
+                      style={[selectedSize === "M" && styles.selectedSize]}
                       onPress={() => handleSizePress("M")}
                     >
                       <Text>M</Text>
                     </TouchableOpacity>
                     <TouchableOpacity
-                      style={[
-                        styles.input_second,
-                        selectedSize === "L" && styles.selectedSize,
-                      ]}
+                      style={[selectedSize === "L" && styles.selectedSize]}
                       onPress={() => handleSizePress("L")}
                     >
                       <Text>L</Text>
                     </TouchableOpacity>
                     <TouchableOpacity
-                      style={[
-                        styles.input_second,
-                        selectedSize === "XL" && styles.selectedSize,
-                      ]}
+                      style={[selectedSize === "XL" && styles.selectedSize]}
                       onPress={() => handleSizePress("XL")}
                     >
                       <Text>XL</Text>

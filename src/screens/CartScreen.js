@@ -9,7 +9,7 @@ import {
 } from "react-native";
 import BurgerMenu from "../components/BurgerMenu";
 import { useState } from "react";
-
+import PlaceOrder from "./PlaceOrder.js";
 import { useCart } from "../components/CartContext.js";
 
 const CartScreen = ({ navigation }) => {
@@ -18,6 +18,10 @@ const CartScreen = ({ navigation }) => {
   const [isMenuVisible, setMenuVisible] = useState(false);
   const toggleMenu = () => {
     setMenuVisible(!isMenuVisible);
+  };
+
+  const navigateToComponentB = () => {
+    navigation.navigate("PlaceOrder", { data: getTotalPrice() });
   };
 
   const getTotalPrice = () => {
@@ -120,7 +124,7 @@ const CartScreen = ({ navigation }) => {
                   alignItems: "center",
                   marginBottom: 20,
                 }}
-                onPress={() => navigation.navigate("PlaceOrder")}
+                onPress={navigateToComponentB}
               >
                 <Text style={{ color: "white" }}>Checkout</Text>
               </TouchableOpacity>
