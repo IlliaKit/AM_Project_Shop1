@@ -1,4 +1,4 @@
-import React, { useContext } from "react";
+import React from "react";
 import {
   View,
   Text,
@@ -18,6 +18,13 @@ const CartScreen = ({ navigation }) => {
   const [isMenuVisible, setMenuVisible] = useState(false);
   const toggleMenu = () => {
     setMenuVisible(!isMenuVisible);
+  };
+
+  const getTotalPrice = () => {
+    return cartItems.reduce(
+      (total, item) => total + item.price * item.quantity,
+      0
+    );
   };
   return (
     <>
@@ -93,6 +100,30 @@ const CartScreen = ({ navigation }) => {
                   </View>
                 </View>
               ))}
+
+              <Text style={styles.total}>
+                Subtotal: ${getTotalPrice().toFixed(2)}
+              </Text>
+              <Text style={styles.total}>Shoping Cost: $8</Text>
+              <Text style={styles.total}>Tax: $0</Text>
+              <Text style={styles.total}>
+                Total: {(getTotalPrice() + 8).toFixed(2)}
+              </Text>
+              <TouchableOpacity
+                style={{
+                  height: 40,
+                  width: "100%",
+
+                  backgroundColor: "#8181F7",
+                  borderRadius: 30,
+                  justifyContent: "center",
+                  alignItems: "center",
+                  marginBottom: 20,
+                }}
+                onPress={() => navigation.navigate("PlaceOrder")}
+              >
+                <Text style={{ color: "white" }}>Checkout</Text>
+              </TouchableOpacity>
             </ScrollView>
           )}
         </View>
@@ -120,5 +151,13 @@ const styles = StyleSheet.create({
     height: 25,
     width: 25,
     paddingLeft: 8,
+  },
+  total: {
+    fontSize: 18,
+    color: "gray",
+    fontWeight: "normal",
+    marginVertical: 10,
+    alignItems: "center",
+    justifyContent: "center",
   },
 });

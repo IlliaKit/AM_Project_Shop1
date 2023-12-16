@@ -32,9 +32,14 @@ export const CartProvider = ({ children }) => {
 
   const removeFromCart = (item, size) => {
     setCartItems((prevItems) =>
-      prevItems.filter(
-        (i) => !(i.id === item.id && i.size === size && i.quantity === 1)
-      )
+      prevItems.reduce((acc, i) => {
+        if (i.id === item.id && i.size === size && i.quantity > 1) {
+          acc.push({ ...i, quantity: i.quantity - 1 });
+        } else if (i.id !== item.id || i.size !== item.size) {
+          acc.push(i);
+        }
+        return acc;
+      }, [])
     );
   };
 

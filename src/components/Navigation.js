@@ -8,7 +8,7 @@ import { AuthContext } from "../context/AuthContext";
 import SalesScreen from "../screens/SalesScreen";
 import AddNewItemScreen from "../screens/AddNewItemScreen";
 import CartScreen from "../screens/CartScreen";
-
+import PlaceOrder from "../screens/PlaceOrder";
 const Stack = createNativeStackNavigator();
 
 const Navigation = () => {
@@ -36,6 +36,11 @@ const Navigation = () => {
             <Stack.Screen
               name="Cart"
               component={CartScreen}
+              options={{ headerShown: false }}
+            />
+            <Stack.Screen
+              name="PlaceOrder"
+              component={PlaceOrder}
               options={{ headerShown: false }}
             />
           </>
