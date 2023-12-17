@@ -1,5 +1,4 @@
 import React from "react";
-import { View, Text } from "react-native";
 import Navigation from "./src/components/Navigation";
 import { AuthProvider } from "./src/context/AuthContext";
 import { CartProvider } from "./src/components/CartContext";
