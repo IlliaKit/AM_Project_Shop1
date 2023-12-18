@@ -1,14 +1,16 @@
 import React from "react";
 import Navigation from "./src/components/Navigation";
 import { AuthProvider } from "./src/context/AuthContext";
-import { CartProvider } from "./src/components/CartContext";
-
+import { CartProvider } from "./src/context/CartContext";
+import { PurchaseHistoryProvider } from "./src/context/PurchaseHistoryContext";
 const App = () => {
   return (
     <CartProvider>
-      <AuthProvider>
-        <Navigation />
-      </AuthProvider>
+      <PurchaseHistoryProvider>
+        <AuthProvider>
+          <Navigation />
+        </AuthProvider>
+      </PurchaseHistoryProvider>
     </CartProvider>
   );
 };
