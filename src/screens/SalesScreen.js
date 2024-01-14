@@ -9,16 +9,15 @@ import {
   Modal,
   ScrollView,
 } from "react-native";
+
 import Spinner from "react-native-loading-spinner-overlay";
 import { AuthContext } from "../context/AuthContext";
 import axios from "axios";
 import BurgerMenu from "../components/BurgerMenu";
 import { styles } from "../components/styles.js";
-import { useCart } from "../context/CartContext.js";
 
-const HomeScreen = () => {
+const SalesScreen = () => {
   const { isLoading } = useContext(AuthContext);
-  const { addToCart } = useCart();
   const [products, setProducts] = useState([]);
   const [productLoading, setProductLoading] = useState(false);
 
@@ -28,46 +27,36 @@ const HomeScreen = () => {
 
   const [selectedSize, setSelectedSize] = useState("S");
 
-  // Function to handle clicking on a size
   const handleSizePress = (size) => {
     setSelectedSize(size);
   };
 
-  // Function to toggle the visibility of the burger menu
   const toggleMenu = () => {
     setMenuVisible(!isMenuVisible);
   };
 
-  // Function for switching the visibility of the modal window with the product
   const toggleProductModal = () => {
     setProductModalVisible(!isProductModalVisible);
   };
 
   useEffect(() => {
     setProductLoading(true);
-    // Retrieving products from the API "
+
+    // Retrieving products from the API"
     axios
-      .get("https://fakestoreapi.com/products/category/women's clothing")
+      .get("https://fakestoreapi.com/products/category/men's clothing")
       .then((res) => {
         setProducts(res.data);
       })
       .catch((e) => {
-        console.log(`register error ${e}`);
+        console.log(`API error: ${e}`);
       })
       .finally(() => {
         setProductLoading(false);
       });
   }, []);
 
-  // Function for adding a product to cart
-  const handleAddToBag = () => {
-    if (selectedProduct) {
-      addToCart(selectedProduct, selectedSize);
-      toggleProductModal();
-    }
-  };
-
-  // Function to display each item in the product list
+  // Rendering the product list item
   const renderItem = ({ item }) => (
     <TouchableOpacity onPress={() => handleProductPress(item)}>
       <View style={styles.itemContainer}>
@@ -75,14 +64,24 @@ const HomeScreen = () => {
         <Text style={styles.itemTitle} numberOfLines={1} ellipsizeMode="tail">
           {item.title}
         </Text>
-        <Text style={styles.itemDescription} ellipsizeMode="tail">
-          ${item.price}
+        <Text ellipsizeMode="tail">
+          <Text
+            style={{
+              textDecorationLine: "line-through",
+              textDecorationColor: "red",
+            }}
+          >
+            ${item.price}
+          </Text>
+          <Text style={{ color: "red", fontWeight: "bold" }}>
+            ${item.price - 10}
+          </Text>
         </Text>
       </View>
     </TouchableOpacity>
   );
 
-  // Function to handle clicking on a product
+  // Handle clicking on a product
   const handleProductPress = (product) => {
     setSelectedProduct(product);
     toggleProductModal();
@@ -101,8 +100,17 @@ const HomeScreen = () => {
             </TouchableOpacity>
             <BurgerMenu isVisible={isMenuVisible} toggleMenu={toggleMenu} />
           </View>
-
-          {/* Grocery list */}
+          <Text
+            style={{
+              paddingLeft: "15%",
+              marginBottom: 20,
+              fontWeight: "bold",
+              alignContent: "center",
+              justifyContent: "center",
+            }}
+          >
+            Only office supplies in the shop
+          </Text>
           <FlatList
             data={products}
             numColumns={2}
@@ -110,7 +118,7 @@ const HomeScreen = () => {
             keyExtractor={(element) => element.id.toString()}
           />
 
-          {/* Modal window for selecting a product */}
+          {/* -----------SELECT SWITCH PRODUCT---------------- */}
           <Modal visible={isProductModalVisible} animationType="slide">
             <TouchableOpacity
               style={{ marginTop: 20 }}
@@ -136,45 +144,52 @@ const HomeScreen = () => {
                     {selectedProduct?.title}
                   </Text>
                   <Text style={styles.selectPrice}>
-                    ${selectedProduct?.price}
+                    ${selectedProduct?.price - 10}
                   </Text>
                   <View style={styles.size_color}>
                     <Text>Size</Text>
-
                     <TouchableOpacity
-                      style={[selectedSize === "S" && styles.selectedSize]}
+                      style={[
+                        styles.input_second,
+                        selectedSize === "S" && styles.selectedSize,
+                      ]}
                       onPress={() => handleSizePress("S")}
                     >
                       <Text>S</Text>
                     </TouchableOpacity>
                     <TouchableOpacity
-                      style={[selectedSize === "M" && styles.selectedSize]}
+                      style={[
+                        styles.input_second,
+                        selectedSize === "M" && styles.selectedSize,
+                      ]}
                       onPress={() => handleSizePress("M")}
                     >
                       <Text>M</Text>
                     </TouchableOpacity>
                     <TouchableOpacity
-                      style={[selectedSize === "L" && styles.selectedSize]}
+                      style={[
+                        styles.input_second,
+                        selectedSize === "L" && styles.selectedSize,
+                      ]}
                       onPress={() => handleSizePress("L")}
                     >
                       <Text>L</Text>
                     </TouchableOpacity>
                     <TouchableOpacity
-                      style={[selectedSize === "XL" && styles.selectedSize]}
+                      style={[
+                        styles.input_second,
+                        selectedSize === "XL" && styles.selectedSize,
+                      ]}
                       onPress={() => handleSizePress("XL")}
                     >
                       <Text>XL</Text>
                     </TouchableOpacity>
                   </View>
-
+                  <Text style={styles.input}>Color</Text>
                   <Text style={{ marginBottom: 20 }}>
                     {selectedProduct?.description}
                   </Text>
-                  {/* Button to add to cart */}
-                  <TouchableOpacity
-                    style={styles.ButAddToBag}
-                    onPress={handleAddToBag}
-                  >
+                  <TouchableOpacity style={styles.ButAddToBag}>
                     <Text style={{ color: "white" }}>Add to Bag</Text>
                   </TouchableOpacity>
                 </View>
@@ -187,4 +202,4 @@ const HomeScreen = () => {
   );
 };
 
-export default HomeScreen;
+export default SalesScreen;
