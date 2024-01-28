@@ -11,20 +11,32 @@
       "resizeMode": "contain",
       "backgroundColor": "#ffffff"
     },
-    "assetBundlePatterns": [
-      "**/*"
-    ],
+    "dependencies": {
+  
+      "expo-location": "~12.0.0"
+    
+    },
+    "expo": {
+      "assetBundlePatterns": ["assets/fonts/*"]
+    },
     "ios": {
       "supportsTablet": true
     },
     "android": {
+      "permissions": ["ACCESS_FINE_LOCATION"],
       "adaptiveIcon": {
         "foregroundImage": "./assets/adaptive-icon.png",
         "backgroundColor": "#ffffff"
-      }
+      },
+      "package": "com.kitenek.auth"
     },
     "web": {
       "favicon": "./assets/favicon.png"
+    },
+    "extra": {
+      "eas": {
+        "projectId": "0a16468f-63cc-46d6-8951-6d6ffab35cb3"
+      }
     }
   }
 }

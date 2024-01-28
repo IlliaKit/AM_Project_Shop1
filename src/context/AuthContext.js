@@ -2,14 +2,19 @@ import AsyncStorage from "@react-native-async-storage/async-storage";
 import axios from "axios";
 import React, { createContext, useEffect, useState } from "react";
 import { BASE_URL } from "../config";
+import { Alert } from "react-native";
 
+// Create an authentication context
 export const AuthContext = createContext();
 
+// Authentication context provider component
 export const AuthProvider = ({ children }) => {
+  // States to store user information, loading state, and splash screen state
   const [userInfo, setUserInfo] = useState({});
   const [isLoading, setIsLoading] = useState(false);
   const [splashLoading, setSplashLoading] = useState(false);
 
+  // User registration functionя
   const register = (username, email, password) => {
     setIsLoading(true);
 
@@ -25,13 +30,16 @@ export const AuthProvider = ({ children }) => {
         AsyncStorage.setItem("userInfo", JSON.stringify(userInfo));
         setIsLoading(false);
         console.log(userInfo);
+        Alert.alert("", "Registration completed successfully");
       })
       .catch((e) => {
         console.log(`register error ${e}`);
+        Alert.alert("Ups..", "Something went wrong, try again");
         setIsLoading(false);
       });
   };
 
+  // User login function
   const login = (username, password) => {
     setIsLoading(true);
 
@@ -49,33 +57,19 @@ export const AuthProvider = ({ children }) => {
       })
       .catch((e) => {
         console.log(`login error ${e}`);
+        Alert.alert("Ups..", "Something went wrong, try again");
         setIsLoading(false);
       });
   };
 
+  // User exit function
   const logout = () => {
     setIsLoading(true);
-
-    axios
-      .post(
-        `${BASE_URL}/logout`,
-        {},
-        {
-          headers: { Authorization: `Bearer ${userInfo.token}` },
-        }
-      )
-      .then((res) => {
-        console.log(res.data);
-        AsyncStorage.removeItem("userInfo");
-        setUserInfo({});
-        setIsLoading(false);
-      })
-      .catch((e) => {
-        console.log(`logout error ${e}`);
-        setIsLoading(false);
-      });
+    setUserInfo({});
+    setIsLoading(false);
   };
 
+  // Function to check if the user is logged in
   const isLoggedIn = async () => {
     try {
       setSplashLoading(true);
@@ -94,10 +88,12 @@ export const AuthProvider = ({ children }) => {
     }
   };
 
+  // Run an authorization check when loading the application
   useEffect(() => {
     isLoggedIn();
   }, []);
 
+  // Provide context and values ​​of functions and states to descendants
   return (
     <AuthContext.Provider
       value={{

@@ -1,0 +1,9 @@
+{
+    "source": {
+        "include": ["B:/mobApp/"]
+    },
+    "opts": {
+      "destination": "B:/JsDoc"
+    }
+  }
+  
